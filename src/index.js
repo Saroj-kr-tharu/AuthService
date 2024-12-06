@@ -3,9 +3,8 @@ const express  = require('express');
 const appRoutes= require("./Routes/index");
 const bodyParser = require('body-parser');
 
-const router = express.Router();
+const {PORT} = require('./config/serverConfig');
 
-const PORT= 3002;
 
 const serverSetupAndStart = () => {
     const app = express();
