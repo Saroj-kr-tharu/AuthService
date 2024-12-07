@@ -6,6 +6,9 @@ const bodyParser = require('body-parser');
 const {PORT} = require('./config/serverConfig');
 
 
+const { User } = require('./models/index');
+const bcrypt = require('bcrypt')
+
 const serverSetupAndStart = () => {
     const app = express();
     app.use(bodyParser.json());
@@ -13,8 +16,10 @@ const serverSetupAndStart = () => {
 
     app.use('/api',appRoutes);
 
-    app.listen(PORT, ()=> {
+    app.listen(PORT, async()=> {
         console.log(`Server Started at ${PORT}`);
+        
+        
         
     })
 
