@@ -16,10 +16,10 @@ class AuthRepo {
 
     async Delete(data) {
         try {
-
+            
             const res = await User.destroy({
                 where: {
-                    id: data
+                    email: data.email
                 },
             });
 

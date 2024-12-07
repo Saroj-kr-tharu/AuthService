@@ -1,25 +1,22 @@
 const express = require("express");
 
-const {createController, deleteController,
-    LoginController
+const { signinController, deleteController,
+    signupController,
+    isAuthenticatedController
 } = require('../../Controllers/AuthController');
+
+const {
+    deleteValidation,
+    signupandSinginandValidation
+} = require("../../Middlewares/authMiddleare");
 
 const router = express.Router();
 
 
-
-router.get('/', (req,res)=> {
-    return res.status(200).json({
-        message:"Welcome To Auth Service Bro",
-        success:true,
-        data:{},
-        err: {},
-    })
-})
-
-router.post('/signup',createController );
-router.delete('/delete',deleteController );
-router.get('/loginup', LoginController);
+router.post('/signup', signupandSinginandValidation, signupController);
+router.delete('/delete', deleteValidation, deleteController);
+router.post('/signin', signupandSinginandValidation, signinController);
+router.post('/authenticate', isAuthenticatedController);
 
 
 module.exports = router;
