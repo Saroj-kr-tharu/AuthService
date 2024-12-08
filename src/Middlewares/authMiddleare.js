@@ -48,9 +48,26 @@ const roleValidation = (req, res, next) => {
     next();
 }
 
+const hasRoleValidation = (req, res, next) => {
+
+    if (!req.body.email  ) {
+
+        console.log('Something went wrong in hasRole');
+        return res.status(400).json({
+            data: {},
+            err:'Email  is missing',
+            message: 'Email   is missing  ',
+            success: false
+        })
+    }
+
+    next();
+}
+
 module.exports = {
     signupandSinginandValidation,
     deleteValidation,
-    roleValidation
+    roleValidation,
+    hasRoleValidation
     
 }

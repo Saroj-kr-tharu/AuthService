@@ -45,7 +45,6 @@ class AuthRepo {
         }
     }
 
-
     async checkRole(data) {
         try {
             const user = await User.findOne({
@@ -96,6 +95,31 @@ class AuthRepo {
 
         } catch (error) {
             console.log("Something went wrong in Repo level (get by email) ");
+            throw (error);
+        }
+    }
+
+    async getAllRole(data) {
+        try {
+            const user = await User.findOne({
+                where: {
+                    email: data.email
+                },
+                include: [{ 
+                    model: Roles, 
+                    through: { attributes: [] } // If using a many-to-many association
+                }]
+            });
+
+            
+            if (!user)
+                return (" User is not present ");
+            const roles =  user.Roles;
+            
+            return roles;
+
+        } catch (error) {
+            console.log("Something went wrong in Repo level (getAllRole) ");
             throw (error);
         }
     }

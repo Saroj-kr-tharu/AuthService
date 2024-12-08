@@ -58,8 +58,8 @@ const verityTokenService = async (token) => {
 
         return {
             id: user.id,
-            email:user.email,
-        
+            email: user.email,
+
         };
     } catch (error) {
         console.log("Something went wrong in service layer (verify token)");
@@ -107,7 +107,7 @@ const checkPasswordService = (plainpasword, hash) => {
 }
 
 
-const addRoleService = async(data) => {
+const addRoleService = async (data) => {
     try {
         const res = await auth.addRole(data)
         return res;
@@ -118,7 +118,7 @@ const addRoleService = async(data) => {
     }
 }
 
-const checkRoleService = async(data) => {
+const checkRoleService = async (data) => {
     try {
         const res = await auth.checkRole(data)
         return res;
@@ -129,11 +129,22 @@ const checkRoleService = async(data) => {
     }
 }
 
+const getAllRoleService = async (data) => {
+    try {
+        const res = await auth.getAllRole(data)
+        return res;
+
+    } catch (error) {
+        console.log("Something went wrong in service layer (getAllRole)");
+        throw error;
+    }
+}
 module.exports = {
     createService,
     deleteService,
     loginService,
     verityTokenService,
     addRoleService,
-    checkRoleService
+    checkRoleService,
+    getAllRoleService
 }

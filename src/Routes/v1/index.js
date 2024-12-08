@@ -6,13 +6,15 @@ const {
     signupController,
     isAuthenticatedController,
     addRoleController,
-    checkRoleController
+    checkRoleController,
+    getAllRoleController
 } = require('../../Controllers/AuthController');
 
 const {
     deleteValidation,
     signupandSinginandValidation,
-    roleValidation
+    roleValidation,
+    hasRoleValidation
 } = require("../../Middlewares/authMiddleare");
 
 const router = express.Router();
@@ -24,5 +26,6 @@ router.post('/signin', signupandSinginandValidation, signinController);
 router.post('/authenticate', isAuthenticatedController);
 router.post('/checkRole', roleValidation, checkRoleController);
 router.post('/addRole', roleValidation, addRoleController);
+router.get('/getAllRole', hasRoleValidation, getAllRoleController);
 
 module.exports = router;
