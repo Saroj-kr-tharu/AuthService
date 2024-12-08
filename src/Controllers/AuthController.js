@@ -2,7 +2,9 @@ const {
     createService,
     deleteService,
     loginService,
-    verityTokenService
+    verityTokenService,
+    addRoleService,
+    checkRoleService
 } = require('../Services/authService');
 
 
@@ -108,9 +110,67 @@ const isAuthenticatedController = async (req, res) => {
     }
 }
 
+
+const checkRoleController = async (req, res) => {
+    try {
+        const data = req.body;
+
+        const msg = await checkRoleService(data);
+
+         let response = ` Check The role of ${data.role} of   ${data.email} has  ${msg}   `
+
+        return res.status(201).json({
+            message: "Successfully Check the Role",
+            success: true,
+            data: response,
+            err: {}
+        });
+
+    } catch (error) {
+        console.log("Something went wrong in controller level (check role)");
+        return res.status(401).json({
+            message: "Unable to check Role",
+            success: false,
+            data: {},
+            err: error.message || error
+        });
+
+    }
+}
+
+
+const addRoleController = async (req, res) => {
+    try {
+        const data = req.body;
+
+        const msg = await addRoleService(data);
+
+        let response = ` Set The role of ${data.role} of   ${data.email} has  ${msg}   `
+
+        return res.status(201).json({
+            message: "Successfully Check the Role",
+            success: true,
+            data: response,
+            err: {}
+        });
+
+    } catch (error) {
+        console.log("Something went wrong in controller level (add role)");
+        return res.status(401).json({
+            message: "Unable to check Role",
+            success: false,
+            data: {},
+            err: error.message || error
+        });
+
+    }
+}
+
 module.exports = {
     signupController,
     signinController,
     deleteController,
-    isAuthenticatedController
+    isAuthenticatedController,
+    addRoleController,
+    checkRoleController
 }

@@ -27,15 +27,30 @@ const deleteValidation = (req, res, next) => {
             message: 'Email  is missing  ',
             success: false
         })
-
     }
 
     next();
 }
 
+const roleValidation = (req, res, next) => {
+
+    if (!req.body.email || !req.body.role ) {
+
+        console.log('Something went wrong in role or Role middleware');
+        return res.status(400).json({
+            data: {},
+            err:'Email or Role is missing',
+            message: 'Email or Role  is missing  ',
+            success: false
+        })
+    }
+
+    next();
+}
 
 module.exports = {
     signupandSinginandValidation,
     deleteValidation,
+    roleValidation
     
 }

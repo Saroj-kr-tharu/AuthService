@@ -106,9 +106,34 @@ const checkPasswordService = (plainpasword, hash) => {
     }
 }
 
+
+const addRoleService = async(data) => {
+    try {
+        const res = await auth.addRole(data)
+        return res;
+
+    } catch (error) {
+        console.log("Something went wrong in service layer (addRoleService)");
+        throw error;
+    }
+}
+
+const checkRoleService = async(data) => {
+    try {
+        const res = await auth.checkRole(data)
+        return res;
+
+    } catch (error) {
+        console.log("Something went wrong in service layer (checkRoleService)");
+        throw error;
+    }
+}
+
 module.exports = {
     createService,
     deleteService,
     loginService,
-    verityTokenService
+    verityTokenService,
+    addRoleService,
+    checkRoleService
 }

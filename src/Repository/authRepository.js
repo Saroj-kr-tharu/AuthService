@@ -1,5 +1,5 @@
 
-const { User } = require('../models/index');
+const { User, Roles } = require('../models/index');
 
 
 class AuthRepo {
@@ -16,7 +16,7 @@ class AuthRepo {
 
     async Delete(data) {
         try {
-            
+
             const res = await User.destroy({
                 where: {
                     email: data.email
@@ -45,11 +45,60 @@ class AuthRepo {
         }
     }
 
-    
 
-   
+    async checkRole(data) {
+        try {
+            const user = await User.findOne({
+                where: {
+                    email: data.email
+                }
+            });
+            if (!user)
+                return (" User is not present ");
 
-    
+            const role = await Roles.findOne({
+                where: {
+                    name: data.role
+                }
+            })
+            if (!role)
+                return (" Role is not present ");
+
+            const response = await user.hasRole(role.id);
+            return response;
+
+        } catch (error) {
+            console.log("Something went wrong in Repo level (get by email) ");
+            throw (error);
+        }
+    }
+
+    async addRole(data) {
+        try {
+            const user = await User.findOne({
+                where: {
+                    email: data.email
+                }
+            });
+            if (!user)
+                return (" User is not present ");
+
+            const role = await Roles.findOne({
+                where: {
+                    name: data.role
+                }
+            })
+            if (!role)
+                return (" Role is not present ");
+
+            const response = await user.addRole(role.id);
+            return response;
+
+        } catch (error) {
+            console.log("Something went wrong in Repo level (get by email) ");
+            throw (error);
+        }
+    }
 
 }
 
