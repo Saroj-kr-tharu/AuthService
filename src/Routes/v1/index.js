@@ -19,6 +19,9 @@ const {
 
 const router = express.Router();
 
+router.get('/info', (req, res) => { 
+    return res.json({message: 'Response from routes booking service'});
+})
 
 router.post('/signup', signupandSinginandValidation, signupController);
 router.delete('/delete', deleteValidation, deleteController);
